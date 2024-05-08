@@ -134,7 +134,7 @@ class Task {
         System.out.println("Entered Id: " + updateId);
         int index = 0;
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println("Inside for loop: " + i);
+            // System.out.println("Inside for loop: " + i);
             int taskId = taskList.get(i).taskId;
             if (taskId == updateId) {
                 isPresent = true;
@@ -289,7 +289,7 @@ class Task {
             taskList.set(index,
                     new Task(taskId, title, note, assignor, assignee, assignedOn, deadline, updatedStatus));
         }
-        // scanner.close();
+        scanner.close();
     }
 
     public void isTaskPresent() {
@@ -314,12 +314,14 @@ class Task {
         }
         if (isPresent == false) {
             System.out.println("Task with the corresponding id not found.");
+            scanner.close();
             return;
         } else {
             taskList.remove(deleteId - 1);
             System.out.println("Task deleted");
             id--;
         }
+        scanner.close();
     }
 
     public String setDateTime() {

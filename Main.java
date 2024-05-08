@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
@@ -38,7 +37,7 @@ public class Main {
                                     // task id, delete a task, update a task, exit
                                     System.out.println("Enter your choice:");
                                     System.out.println(
-                                            "1. Assign Task \n2. Display all the tasks assigned by you \n3. Display a task \n4. Update Task \n5. Delete a task \n6. Exit");
+                                            "1. Assign Task \n2. Display all the tasks assigned by you \n3. Display a task \n4. Update Task \n5. Delete a task \n6. Add an assignee \n7.Display all assignee's \n8. Exit");
                                     System.out.println();
                                     try {
                                         int assignorChoice = scanner.nextInt();
@@ -65,6 +64,12 @@ public class Main {
                                                 taskObj.deleteTask(userId);
                                                 break;
                                             case 6:
+                                                authObj.addNewAssignee();
+                                                break;
+                                            case 7:
+                                                authObj.getAllAssignees();
+                                                break;
+                                            case 8:
                                                 taskLoop = false;
                                                 break;
                                             default:
@@ -83,7 +88,7 @@ public class Main {
                                     // update status, exit
                                     System.out.println("Enter your choice:");
                                     System.out.println(
-                                            "1. Display all the tasks assigned to you \n2. Display a task  \n3. Update Status \n4.  \n5. Exit");
+                                            "1. Display all the tasks assigned to you \n2. Display a task  \n3. Update Status \n4. Exit");
                                     System.out.println();
                                     try {
                                         int assigneeChoice = scanner.nextInt();
@@ -100,10 +105,8 @@ public class Main {
                                                 taskObj.updateTask(userId);
                                                 break;
                                             case 4:
+                                                taskLoop = false;
                                                 break;
-                                            case 5:
-                                                break;
-
                                             default:
                                                 System.out.println("Enter a valid choice from the above");
                                                 break;
@@ -130,7 +133,6 @@ public class Main {
             }
 
         }
-
-        // scanner.close();
+        scanner.close();
     }
 }

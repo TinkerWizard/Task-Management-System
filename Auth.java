@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 class Auth {
-    static HashMap<String, String> userAuth = new HashMap<>();
-    ArrayList<String> assigneeList = new ArrayList<>();
+    static HashMap<String, String> userAuth = new HashMap<>();// to store userId and password of assignor's and assignee's
+    ArrayList<String> assigneeList = new ArrayList<>();//stores only assignee's userid
 
     Auth() {
         addUser();

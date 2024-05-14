@@ -1,5 +1,0 @@
-Java Project
-Task management system
-
-Competitive coding
-Ace DSA

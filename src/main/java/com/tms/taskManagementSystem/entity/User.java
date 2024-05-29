@@ -19,15 +19,18 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
     // define constructors
     public User()
     {
         
     }
-    public User(String name, String userId, String password) {
+    public User(String name, String userId, String password, String email) {
         this.name = name;
         this.userId = userId;
         this.password = password;
+        this.email = email;
     }
 
     // define getters and stters
@@ -56,11 +59,16 @@ public class User {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     
-    //define toString() method
     @Override
     public String toString() {
-        return "User [name=" + name + ", userId=" + userId + ", password=" + password + "]";
+        return "User [name=" + name + ", userId=" + userId + ", password=" + password + ", email=" + email + "]";
     }
     
 }

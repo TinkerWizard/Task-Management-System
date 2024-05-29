@@ -19,124 +19,126 @@ public class Task {
     @Column(name = "task_id")
     private int taskId;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "task_title")
+    private String taskTitle;
 
-    @Column(name = "note")
-    private String note;
+    @Column(name = "task_note")
+    private String taskNote;
 
-    @Column(name = "assignor")
-    private String assignor;
+    @Column(name = "assignor_id")
+    private String assignorId;
 
-    @Column(name = "assignee")
-    private String assignee;
+    @Column(name = "assignee_id")
+    private String assigneeId;
 
-    @Column(name = "assigned_on")
-    private String assignedOn;
+    @Column(name = "assigned_date")
+    private String assignedDate;
 
-    @Column(name = "deadline")
-    private String deadline;
+    @Column(name = "due_date")
+    private String dueDate;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "task_status")
+    private String taskStatus;
 
     // define constructors
     public Task() {
 
     }
 
-    public Task(String title, String note, String assignor, String assignee, String assignedOn,
-            String deadline, String status) {
-        this.title = title;
-        this.note = note;
-        this.assignor = assignor;
-        this.assignee = assignee;
-        this.assignedOn = assignedOn;
-        this.deadline = deadline;
-        this.status = status;
+    public Task(String taskTitle, String taskNote, String assignorId, String assigneeId, String assignedDate,
+            String dueDate, String taskStatus) {
+        this.taskTitle = taskTitle;
+        this.taskNote = taskNote;
+        this.assignorId = assignorId;
+        this.assigneeId = assigneeId;
+        this.assignedDate = assignedDate;
+        this.dueDate = dueDate;
+        this.taskStatus = taskStatus;
     }
-    // define getters and setters
 
     public int getTaskId() {
         return taskId;
     }
 
-    public String getTitle() {
-        return title;
+    // public void setTaskId(int taskId) {
+    //     this.taskId = taskId;
+    // }
+
+    public String getTaskTitle() {
+        return taskTitle;
     }
 
-    public String getNote() {
-        return note;
+    public void setTaskTitle(String taskTitle) {
+        this.taskTitle = taskTitle;
     }
 
-    public String getAssignor() {
-        return assignor;
+    public String getTaskNote() {
+        return taskNote;
     }
 
-    public String getAssignee() {
-        return assignee;
+    public void setTaskNote(String taskNote) {
+        this.taskNote = taskNote;
     }
 
-    public String getAssignedOn() {
-        return assignedOn;
+    public String getAssignorId() {
+        return assignorId;
     }
 
-    public String getDeadline() {
-        return deadline;
+    public void setAssignorId(String assignorId) {
+        this.assignorId = assignorId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getAssigneeId() {
+        return assigneeId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAssigneeId(String assigneeId) {
+        this.assigneeId = assigneeId;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public String getAssignedDate() {
+        return assignedDate;
     }
 
-    public void setAssignor(String assignor) {
-        this.assignor = assignor;
+    public void setAssignedDate(String assignedDate) {
+        this.assignedDate = assignedDate;
     }
 
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
+    public String getDueDate() {
+        return dueDate;
     }
 
-    public void setAssignedOn(String assignedOn) {
-        this.assignedOn = assignedOn;
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
+    public String getTaskStatus() {
+        return taskStatus;
     }
 
-    public void setStatus(String status) {
-        // pre-defined task statuses
-        //set drop down in the front end
-        String[] taskStatus = {
-                "Not Started",
-                "In Progress",
-                "On Hold",
-                "Completed",
-                "Cancelled",
-                "Pending",
-                "Under Review",
-                "Delayed",
-                "In Planning",
-                "Blocked"
-        };
-        this.status = status;
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
     }
+    
 
-    @Override
-    public String toString() {
-        return "Task [taskId=" + taskId + ", title=" + title + ", note=" + note + ", assignor=" + assignor
-                + ", assignee=" + assignee + ", assignedOn=" + assignedOn + ", deadline=" + deadline + ", status="
-                + status + "]";
-    }
+    // public void setStatus(String status) {
+    //     // pre-defined task statuses
+    //     //set drop down in the front end
+    //     String[] taskStatus = {
+    //             "Not Started",
+    //             "In Progress",
+    //             "On Hold",
+    //             "Completed",
+    //             "Cancelled",
+    //             "Pending",
+    //             "Under Review",
+    //             "Delayed",
+    //             "In Planning",
+    //             "Blocked"
+    //     };
+    //     this.status = status;
+    // }
+
 
     // define toString() method
 

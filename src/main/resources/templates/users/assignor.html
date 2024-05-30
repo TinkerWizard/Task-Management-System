@@ -45,7 +45,7 @@
                     <td th:text="${task.dueDate}" />
                     <td th:text="${task.taskStatus}" />
                     <td>
-                      <a th:href="@{/users/assignor/update(taskId=${task.taskId})}">Update</a>
+                      <a th:href="@{/users/assignor/update(taskId=${task.taskId})}" class="btn btn-info">Update</a>
                     </td>
                     <!-- add a button to update the status -->
                     <!-- repopulate all the tasks in the form with save button -->

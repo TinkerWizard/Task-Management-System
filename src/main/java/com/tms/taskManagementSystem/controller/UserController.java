@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -124,23 +123,25 @@ public class UserController {
 
     @GetMapping("/assignor")
     public String assignorPage(Model model) {
-        return "/users/assignor";
+        return "users/assignor";
     }
 
     @GetMapping("/assignor/add")
     public String addTask(Model model) {
         Task task = new Task();
         model.addAttribute("task", task);
-        // model.addAttribute("assignorId", assignorId);
-        // System.out.println("The assignor ID" + assignorId);
         return "add-task";
     }
 
     @PostMapping("/assignor/save")
-    public String saveTask(@ModelAttribute("task") Task task) {
+    public String saveTask(@ModelAttribute("task") Task task, Model model) {
         taskService.saveTask(task);
         System.out.println("Saved task:" + task.toString());
-        return "redirect:/users/assignor";
+        List<Task> tasks = taskService.getTasksByAssignorId(task.getAssignorId());
+        User assignor = userService.getUserById(task.getAssignorId());
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("assignor", assignor);
+        return "users/assignor";
     }
 
     @GetMapping("/assignor/update")
@@ -152,9 +153,11 @@ public class UserController {
     }
 
     @PostMapping("/assignor/update")
-    public String updateTask(@ModelAttribute("task") Task task)
+    public String updateTask(@ModelAttribute("task") Task task, Model model)
     {
         Task existingTask = taskService.getTaskById(task.getTaskId());
+        System.out.println(existingTask.toString());
+        existingTask.setTaskId(task.getTaskId());
         existingTask.setTaskTitle(task.getTaskTitle());
         existingTask.setTaskNote(task.getTaskNote());
         //we're not updating assignor id
@@ -162,7 +165,13 @@ public class UserController {
         existingTask.setAssignedDate(task.getAssignedDate());
         existingTask.setDueDate(task.getDueDate());
         existingTask.setTaskStatus(task.getTaskStatus());
+
         taskService.saveTask(existingTask);
-        return "redirect:/users/assignor"; 
+        List<Task> tasks = taskService.getTasksByAssignorId(task.getAssignorId());
+        User assignor = userService.getUserById(task.getAssignorId());
+        model.addAttribute("assignor", assignor);
+        model.addAttribute("tasks", tasks);
+
+        return "users/assignor";
     }       
 }

@@ -67,6 +67,8 @@ public class UserController {
                 if (userId.startsWith("NEE")) {
                     System.out.println("Assignee");
                     List<Task> tasks = taskService.getTasksByAssigneeId(userId);
+                    User assignee = userService.getUserById(userId);
+                    model.addAttribute("assignee", assignee);
                     model.addAttribute("tasks", tasks);
                     role = "assignee";
                 }
@@ -173,5 +175,36 @@ public class UserController {
         model.addAttribute("tasks", tasks);
 
         return "users/assignor";
+    }       
+
+    //ASSIGNEE Methods
+    @GetMapping("/assignee/updateStatus")
+    public String updateStatus(Model model, @RequestParam("taskId") int taskId)
+    {   
+        Task task = taskService.getTaskById(taskId);
+        model.addAttribute("task", task);
+        return "update-status";
+    }
+    @PostMapping("/assignee/updateStatus")
+    public String updateTaskStatus(@ModelAttribute("task") Task task, Model model)
+    {
+        Task existingTask = taskService.getTaskById(task.getTaskId());
+        System.out.println(existingTask.toString());
+        existingTask.setTaskId(task.getTaskId());
+        existingTask.setTaskTitle(task.getTaskTitle());
+        existingTask.setTaskNote(task.getTaskNote());
+        //we're not updating assignor id
+        existingTask.setAssigneeId(task.getAssigneeId());
+        existingTask.setAssignedDate(task.getAssignedDate());
+        existingTask.setDueDate(task.getDueDate());
+        existingTask.setTaskStatus(task.getTaskStatus());
+
+        taskService.saveTask(existingTask);
+        List<Task> tasks = taskService.getTasksByAssigneeId(task.getAssigneeId());
+        User assignee = userService.getUserById(task.getAssigneeId());
+        model.addAttribute("assignee", assignee);
+        model.addAttribute("tasks", tasks);
+
+        return "users/assignee";
     }       
 }

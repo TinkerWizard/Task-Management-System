@@ -56,7 +56,30 @@ INSERT INTO users (name, user_id, password, email) VALUES
 ('Sam Baker', 'NEE_9', 'samB@k3r', 'sam.baker@example.com'),
 ('Tina Hall', 'NEE_10', 'tinaH@ll', 'tina.hall@example.com');
 
+-- INSERTING INTO ROLES TABLE
+INSERT INTO roles (user_id, role) VALUES
+('ADMIN_1', 'ADMIN'),
+('ADMIN_2', 'ADMIN'),
+('ADMIN_3', 'ADMIN'),
+('ADMIN_4', 'ADMIN'),
+('ADMIN_5', 'ADMIN'),
 
+('NOR_1', 'ASSIGNOR'),
+('NOR_2', 'ASSIGNOR'),
+('NOR_3', 'ASSIGNOR'),
+('NOR_4', 'ASSIGNOR'),
+('NOR_5', 'ASSIGNOR'),
+
+('NEE_1', 'ASSIGNEE'),
+('NEE_2', 'ASSIGNEE'),
+('NEE_3', 'ASSIGNEE'),
+('NEE_4', 'ASSIGNEE'),
+('NEE_5', 'ASSIGNEE'),
+('NEE_6', 'ASSIGNEE'),
+('NEE_7', 'ASSIGNEE'),
+('NEE_8', 'ASSIGNEE'),
+('NEE_9', 'ASSIGNEE'),
+('NEE_10', 'ASSIGNEE');
 -- Insert tasks
 INSERT INTO tasks (task_title, task_note, assignor_id, assignee_id, assigned_date, due_date, task_status) VALUES
 ('Complete Report', 'Finish the quarterly report', 'NOR_1', 'NEE_1', '2024-05-01', '2024-05-07', 'In Progress'),

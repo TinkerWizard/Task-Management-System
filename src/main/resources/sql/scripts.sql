@@ -6,15 +6,15 @@ USE tms;
 -- CREATEING TABLES
 CREATE TABLE users (
     name VARCHAR(50) NOT NULL,
-    user_id VARCHAR(50) PRIMARY KEY,
+    username VARCHAR(50) PRIMARY KEY,
     password VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE roles (
-    user_id VARCHAR(50),
+    username VARCHAR(50),
     role VARCHAR(50) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (username) REFERENCES users(username)
 );
 
 CREATE TABLE tasks (
@@ -32,7 +32,7 @@ CREATE TABLE tasks (
 
 -- Insert statements for the users table
 
-INSERT INTO users (name, user_id, password, email) VALUES
+INSERT INTO users (name, username, password, email) VALUES
 ('Alice Smith', 'ADMIN_1', 'pass123', 'alice.smith@example.com'),
 ('Bob Johnson', 'ADMIN_2', 'adminPass!56', 'bob.johnson@example.com'),
 ('Charlie Davis', 'ADMIN_3', 'charlieD@v1s', 'charlie.davis@example.com'),
@@ -57,7 +57,7 @@ INSERT INTO users (name, user_id, password, email) VALUES
 ('Tina Hall', 'NEE_10', 'tinaH@ll', 'tina.hall@example.com');
 
 -- INSERTING INTO ROLES TABLE
-INSERT INTO roles (user_id, role) VALUES
+INSERT INTO roles (username, role) VALUES
 ('ADMIN_1', 'ADMIN'),
 ('ADMIN_2', 'ADMIN'),
 ('ADMIN_3', 'ADMIN'),

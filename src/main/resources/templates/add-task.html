@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h3>Add Task</h3>
-        <form th:action="@{/users/assignor/save}" th:object="${task}" method="POST">
+        <form th:action="@{/assignor/save}" th:object="${task}" method="POST">
             <input type="hidden" th:field="*{taskId}" placeholder="Task Id" class="form-control mb-4 w-25"> 
             <input type="text" th:field="*{taskTitle}" placeholder="Task Title" class="form-control mb-4 w-25"> 
             <input type="text" th:field="*{taskNote}" placeholder="Task Note" class="form-control mb-4 w-25"> 

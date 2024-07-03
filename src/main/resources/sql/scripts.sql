@@ -8,12 +8,13 @@ CREATE TABLE users (
     name VARCHAR(50) NOT NULL,
     username VARCHAR(50) PRIMARY KEY,
     password VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL
+    email VARCHAR(50) NOT NULL,
+    enabled tinyint(1) NOT NULL
 );
 
-CREATE TABLE roles (
+CREATE TABLE authorities (
     username VARCHAR(50),
-    role VARCHAR(50) NOT NULL,
+    authority VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users(username)
 );
 
@@ -32,32 +33,32 @@ CREATE TABLE tasks (
 
 -- Insert statements for the users table
 
-INSERT INTO users (name, username, password, email) VALUES
-('Alice Smith', 'ADMIN_1', 'pass123', 'alice.smith@example.com'),
-('Bob Johnson', 'ADMIN_2', 'adminPass!56', 'bob.johnson@example.com'),
-('Charlie Davis', 'ADMIN_3', 'charlieD@v1s', 'charlie.davis@example.com'),
-('Dana Lee', 'ADMIN_4', 'DanaPass!789', 'dana.lee@example.com'),
-('Evan Moore', 'ADMIN_5', 'evanM00re', 'evan.moore@example.com'),
+INSERT INTO users (name, username, password, email, enabled) VALUES
+('Alice Smith', 'ADMIN_1', '{noop}pass123', 'alice.smith@example.com', 1),
+('Bob Johnson', 'ADMIN_2', '{noop}adminPass!56', 'bob.johnson@example.com', 1),
+('Charlie Davis', 'ADMIN_3', '{noop}charlieD@v1s', 'charlie.davis@example.com', 1),
+('Dana Lee', 'ADMIN_4', '{noop}DanaPass!789', 'dana.lee@example.com', 1),
+('Evan Moore', 'ADMIN_5', '{noop}evanM00re', 'evan.moore@example.com', 1),
 
-('Frank Harris', 'NOR_1', 'pass123', 'frank.harris@example.com'),
-('Grace Kim', 'NOR_2', 'graceK!m987', 'grace.kim@example.com'),
-('Hank Wright', 'NOR_3', 'hankWright!', 'hank.wright@example.com'),
-('Ivy Scott', 'NOR_4', 'ivySc0ttPass', 'ivy.scott@example.com'),
-('Jake Green', 'NOR_5', 'JakeGreeN123', 'jake.green@example.com'),
+('Frank Harris', 'NOR_1', '{noop}pass123', 'frank.harris@example.com', 1),
+('Grace Kim', 'NOR_2', '{noop}graceK!m987', 'grace.kim@example.com', 1),
+('Hank Wright', 'NOR_3', '{noop}hankWright!', 'hank.wright@example.com', 1),
+('Ivy Scott', 'NOR_4', '{noop}ivySc0ttPass', 'ivy.scott@example.com', 1),
+('Jake Green', 'NOR_5', '{noop}JakeGreeN123', 'jake.green@example.com', 1),
 
-('Karen Thompson', 'NEE_1', 'pass123', 'karen.thompson@example.com'),
-('Leo Martin', 'NEE_2', 'leoM@rt!n', 'leo.martin@example.com'),
-('Mia Clark', 'NEE_3', 'MiaClark!', 'mia.clark@example.com'),
-('Noah Lewis', 'NEE_4', 'noahL3w!s', 'noah.lewis@example.com'),
-('Olivia Young', 'NEE_5', 'OliviaY0ung', 'olivia.young@example.com'),
-('Paul Walker', 'NEE_6', 'paulW@lk3r', 'paul.walker@example.com'),
-('Quincy Brown', 'NEE_7', 'QuincyBr0wn', 'quincy.brown@example.com'),
-('Rachel Wilson', 'NEE_8', 'RachelW!ls0n', 'rachel.wilson@example.com'),
-('Sam Baker', 'NEE_9', 'samB@k3r', 'sam.baker@example.com'),
-('Tina Hall', 'NEE_10', 'tinaH@ll', 'tina.hall@example.com');
+('Karen Thompson', 'NEE_1', '{noop}pass123', 'karen.thompson@example.com', 1),
+('Leo Martin', 'NEE_2', '{noop}leoM@rt!n', 'leo.martin@example.com', 1),
+('Mia Clark', 'NEE_3', '{noop}MiaClark!', 'mia.clark@example.com', 1),
+('Noah Lewis', 'NEE_4', '{noop}noahL3w!s', 'noah.lewis@example.com', 1),
+('Olivia Young', 'NEE_5', '{noop}OliviaY0ung', 'olivia.young@example.com', 1),
+('Paul Walker', 'NEE_6', '{noop}paulW@lk3r', 'paul.walker@example.com', 1),
+('Quincy Brown', 'NEE_7', '{noop}QuincyBr0wn', 'quincy.brown@example.com', 1),
+('Rachel Wilson', 'NEE_8', '{noop}RachelW!ls0n', 'rachel.wilson@example.com', 1),
+('Sam Baker', 'NEE_9', '{noop}samB@k3r', 'sam.baker@example.com', 1),
+('Tina Hall', 'NEE_10', '{noop}tinaH@ll', 'tina.hall@example.com', 1);
 
 -- INSERTING INTO ROLES TABLE
-INSERT INTO roles (username, role) VALUES
+INSERT INTO authorities (username, authority) VALUES
 ('ADMIN_1', 'ADMIN'),
 ('ADMIN_2', 'ADMIN'),
 ('ADMIN_3', 'ADMIN'),

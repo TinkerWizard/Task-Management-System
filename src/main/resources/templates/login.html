@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +9,9 @@
 <body>
     <div class="container">
         <h1>Login Form</h1>
-        <form th:action="@{/users/role-detection}" method="POST" th:object="${loginForm}">
-            <input th:field="*{userId}" type="text" class="form-control mb-2 w-25" placeholder="User Id"/>
-            <input th:field="*{password}" type="password" class="form-control mb-2 w-25" placeholder="Password"/>
+        <form th:action="@{/authenticateTheUser}" method="POST" th:object="${loginForm}">
+            <input th:field="*{username}" type="text" id="username" class="form-control mb-2 w-25" placeholder="Username" name="username" required autofocus/>
+            <input th:field="*{password}" type="password" id="password" class="form-control mb-2 w-25" placeholder="Password" name="password" required/>
             <button type="submit" class="btn btn-info col-2">Submit</button>
         </form>
     </div>

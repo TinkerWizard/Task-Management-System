@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h3>Update Task Status</h3>
-        <form th:action="@{/users/assignee/updateStatus}" th:object="${task}" method="POST">
+        <form th:action="@{/assignee/updateStatus}" th:object="${task}" method="POST">
             <input type="hidden" th:field="*{taskId}" placeholder="Task Id" class="form-control mb-4 w-25" readonly> 
             <input type="text" th:field="*{taskTitle}" placeholder="Task Title" class="form-control mb-4 w-25" readonly> 
             <input type="text" th:field="*{taskNote}" placeholder="Task Note" class="form-control mb-4 w-25" readonly> 

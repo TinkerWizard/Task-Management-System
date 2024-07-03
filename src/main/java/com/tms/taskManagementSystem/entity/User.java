@@ -13,8 +13,8 @@ public class User {
     private String name;
 
     @Id
-    @Column(name = "user_id")
-    private String userId;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -26,9 +26,9 @@ public class User {
     {
         
     }
-    public User(String name, String userId, String password, String email) {
+    public User(String name, String username, String password, String email) {
         this.name = name;
-        this.userId = userId;
+        this.username = username;
         this.password = password;
         this.email = email;
     }
@@ -39,8 +39,8 @@ public class User {
         return name;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -51,8 +51,8 @@ public class User {
         this.name = name;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -68,7 +68,7 @@ public class User {
     
     @Override
     public String toString() {
-        return "User [name=" + name + ", userId=" + userId + ", password=" + password + ", email=" + email + "]";
+        return "User [name=" + name + ", username=" + username + ", password=" + password + ", email=" + email + "]";
     }
     
 }

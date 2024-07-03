@@ -17,7 +17,7 @@
         <div class="container" th:object="${assignee}">
           Assignee Name: <span th:text="*{name}" />
           <br>
-          Assignee Id: <span th:text="*{userId}" />
+          Assignee Id: <span th:text="*{username}" />
           <br>
           Assignee Email: <span th:text="*{email}" />
         </div>
@@ -48,7 +48,7 @@
             <td th:text="${task.taskStatus}" />
             <td>
               <a
-                th:href="@{/users/assignee/updateStatus(taskId=${task.taskId})}"
+                th:href="@{/assignee/updateStatus(taskId=${task.taskId})}"
                 class="btn btn-info"
                 >Update</a>
             </td>
@@ -60,5 +60,8 @@
       </table>
     </div>
     <!-- logout button and redirect to login -->
+    <form th:action="@{/logout}" method="POST">
+      <input type="submit" value="Logout" />
+    </form>
   </body>
 </html>

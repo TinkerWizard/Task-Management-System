@@ -20,22 +20,31 @@
     <div sec:authorize="hasAuthority('ADMIN')">
       <!-- <span th:text="${user.username}" /> -->
       <!-- Only admins can view this div content -->
+      <div th:object="${user}">
+        <span th:text="*{name}"/>
+        <span th:text="*{username}" />
+        <span th:text="*{email}" />
+      </div>
       <p>
-        <a th:href="@{/admin}">Admin</a>
-        (Only for Admin Peeps)
+        <span>Welcome back Admin</span>
+        <span>
+          <a th:href="@{/admin}">Dashboard</a>
+        </span>
       </p>
       <hr />
     </div>
     <div sec:authorize="hasAuthority('ASSIGNOR')">
       <!-- Only admins can view this div content -->
-       <div th:object="${user}">
+       <div th:object="${user}" class="d-flex gap-1 flex-column mb-4">
          <span th:text="*{name}"/>
          <span th:text="*{username}" />
          <span th:text="*{email}" />
        </div>
       <p>
-        <a th:href="@{/assignor(username=${user.username})}" th:object="${user.username}">Assignor</a>
-        (Only for Assignor Peeps)
+        <span>Welcome back Assignor</span>
+        <span>
+          <a th:href="@{/assignor(username=${user.username})}" th:object="${user.username}">Dashboard</a>
+        </span>
       </p>
       <hr />
     </div>

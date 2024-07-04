@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tms.taskManagementSystem.entity.Task;
 import com.tms.taskManagementSystem.entity.User;
+import com.tms.taskManagementSystem.service.AuthorityService;
 import com.tms.taskManagementSystem.service.TaskService;
 import com.tms.taskManagementSystem.service.UserService;
 
@@ -23,11 +24,13 @@ public class UserController {
 
     UserService userService;
     TaskService taskService;
+    AuthorityService authorityService;
 
     // @Autowired
-    public UserController(UserService userService, TaskService taskService) {
+    public UserController(UserService userService, TaskService taskService, AuthorityService authorityService) {
         this.userService = userService;
         this.taskService = taskService;
+        this.authorityService = authorityService;
     }
 
     @PostMapping("/role-detection")
@@ -88,15 +91,19 @@ public class UserController {
     @GetMapping("/admin/add")
     public String addUser(Model model) {
         User newUser = new User();
+        newUser.setEnabled(1);
         model.addAttribute("user", newUser);
         return "add-user";
     }
 
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("authority") String authority) {
         userService.saveUser(user);
+        authorityService.addUserWithAuthority(user, authority);
+        System.out.println(user);
+        System.out.println(authority);
         System.out.println(user.toString());
-        return "redirect:/users/admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/admin/update")
@@ -113,7 +120,7 @@ public class UserController {
         userService.deleteUser(user);
         System.out.println("User deleted. \n" + user.toString());
         System.out.println(user.toString());
-        return "redirect:/users/admin";
+        return "redirect:/admin";
     }
 
     // ASSIGNOR methods
@@ -133,8 +140,14 @@ public class UserController {
 
     @GetMapping("/assignor/add")
     public String addTask(Model model) {
+        String assignorId = SecurityContextHolder.getContext().getAuthentication().getName();
+        // System.out.println("Username: " + username);
         Task task = new Task();
+        List<User> assigneeList = userService.getAssignees();
+        // System.out.println(assigneeList);
+        task.setAssignorId(assignorId);
         model.addAttribute("task", task);
+        model.addAttribute("assignees", assigneeList);
         return "add-task";
     }
 

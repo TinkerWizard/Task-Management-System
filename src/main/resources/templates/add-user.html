@@ -9,13 +9,28 @@
 </head>
 <body>
     <div class="container">
-        <form th:action="@{/save}" th:object="${user}" method="POST">
+        <form id="userForm" th:action="@{/save}" th:object="${user}" method="POST">
             <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb-4 w-25"> 
             <input type="text" th:field="*{username}" placeholder="Username" class="form-control mb-4 w-25"> 
             <input type="text" th:field="*{password}" placeholder="Password" class="form-control mb-4 w-25"> 
             <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 w-25"> 
-            <button class="btn btn-info col-2" type="submit">Save</button>
+            <div>
+                <p>Authority:</p>
+                <select id="authoritySelect">
+                    <option th:value="ADMIN" th:text="ADMIN"></option>
+                    <option th:value="ASSIGNOR" th:text="ASSIGNOR"></option>
+                    <option th:value="ASSIGNEE" th:text="ASSIGNEE"></option>
+                </select>
+            </div>
+            <input type="hidden" name="authority" id="authorityInput">
+            <button class="btn btn-info col-2" type="button" onclick="submitForm()">Save</button>
         </form>
     </div>
+    <script>
+        function submitForm() {
+            document.getElementById('authorityInput').value = document.getElementById('authoritySelect').value;
+            document.getElementById('userForm').submit();
+        }
+        </script>
 </body>
 </html>

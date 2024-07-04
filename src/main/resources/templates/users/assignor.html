@@ -11,9 +11,14 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body class="p-5">
     <div class="container">
-      <h3>Assignor Profile</h3>
+      <nav class="d-flex justify-content-between">
+        <h3>Assignor Profile</h3>
+        <form th:action="@{/logout}" method="POST">
+          <input type="submit" value="Logout" />
+        </form>
+      </nav>
       <div class="container" th:object="${assignor}">
         Assignor Name: <span th:text="*{name}" />
         <br />
@@ -51,7 +56,7 @@
             <td th:text="${task.taskStatus}" />
             <td>
               <a
-                th:href="@{/users/assignor/update(taskId=${task.taskId})}"
+                th:href="@{/assignor/update(taskId=${task.taskId})}"
                 class="btn btn-info"
                 >Update</a
               >
@@ -63,9 +68,6 @@
       </table>
     </div>
     <!-- logout button and redirect to login -->
-    <a th:href="@{/home}">Back to Home</a>
-    <form th:action="@{/logout}" method="POST">
-      <input type="submit" value="Logout" />
-    </form>
+    <a th:href="@{/home}" class="d-flex justify-content-end">Back to Home</a>
   </body>
 </html>

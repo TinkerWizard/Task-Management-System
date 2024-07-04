@@ -1,11 +1,13 @@
 package com.tms.taskManagementSystem.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tms.taskManagementSystem.dao.UserRepository;
+import com.tms.taskManagementSystem.entity.Authority;
 import com.tms.taskManagementSystem.entity.User;
 
 @Service
@@ -26,6 +28,8 @@ public class UserService {
         List<User> users = userRepository.findAll();
         return users;
     }
+    
+
     public User getUserByUsername(String username) {
         User user = userRepository.findById(username).get();
         return user;
@@ -38,5 +42,8 @@ public class UserService {
     public void deleteUser(User user)
     {
         userRepository.delete(user);
+    }
+    public List<User> getAssignees() {
+        return userRepository.findUsersByAuthority("ASSIGNEE");
     }
 }

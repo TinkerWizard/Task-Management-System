@@ -13,6 +13,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE authorities (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
     authority VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES users(username)

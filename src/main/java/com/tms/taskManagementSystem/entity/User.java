@@ -1,8 +1,16 @@
 package com.tms.taskManagementSystem.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,16 +29,24 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "enabled")
+    private int enabled;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Authority> authorities = new HashSet<>();;
+    
     // define constructors
     public User()
     {
         
     }
-    public User(String name, String username, String password, String email) {
+    public User(String name, String username, String password, String email, int enabled) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.enabled = enabled;
     }
 
     // define getters and stters
@@ -66,6 +82,19 @@ public class User {
         this.email = email;
     }
     
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
     @Override
     public String toString() {
         return "User [name=" + name + ", username=" + username + ", password=" + password + ", email=" + email + "]";

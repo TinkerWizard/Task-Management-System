@@ -1,13 +1,11 @@
 package com.tms.taskManagementSystem.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tms.taskManagementSystem.dao.UserRepository;
-import com.tms.taskManagementSystem.entity.Authority;
 import com.tms.taskManagementSystem.entity.User;
 
 @Service

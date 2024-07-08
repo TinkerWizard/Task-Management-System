@@ -11,9 +11,14 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body class="p-5">
     <div class="container">
-      <h3>Assignee Profile</h3>
+      <nav class="d-flex justify-content-between">
+        <h3>Assignee Profile</h3>
+        <form th:action="@{/logout}" method="POST">
+          <input type="submit" value="Logout" />
+        </form>
+      </nav>
         <div class="container" th:object="${assignee}">
           Assignee Name: <span th:text="*{name}" />
           <br>
@@ -60,8 +65,6 @@
       </table>
     </div>
     <!-- logout button and redirect to login -->
-    <form th:action="@{/logout}" method="POST">
-      <input type="submit" value="Logout" />
-    </form>
+    <a th:href="@{/home}" class="d-flex justify-content-end">Back to Home</a>
   </body>
 </html>

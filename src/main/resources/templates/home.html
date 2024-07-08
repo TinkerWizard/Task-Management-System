@@ -15,12 +15,17 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
-    <h1>Home</h1>
+  <body class="p-5">
+    <nav class="d-flex justify-content-between">
+      <h1>Home</h1>
+      <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" />
+      </form>
+    </nav>
     <div sec:authorize="hasAuthority('ADMIN')">
       <!-- <span th:text="${user.username}" /> -->
       <!-- Only admins can view this div content -->
-      <div th:object="${user}">
+      <div th:object="${user}" class="d-flex gap-1 flex-column mb-4">
         <span th:text="*{name}"/>
         <span th:text="*{username}" />
         <span th:text="*{email}" />
@@ -48,16 +53,20 @@
       </p>
       <hr />
     </div>
-    <div sec:authorize="hasAuthority('ASSIGNEE')">
+    <div sec:authorize="hasAuthority('ASSIGNEE')" >
       <!-- Only admins can view this div content -->
+      <div th:object="${user}" class="d-flex gap-1 flex-column mb-4">
+        <span th:text="*{name}"/>
+        <span th:text="*{username}" />
+        <span th:text="*{email}" />
+      </div>
       <p>
-        <a th:href="@{/assignee(username=${user.username})}">Assignee</a>
-        (Only for Assignee Peeps)
+        <span>Welcome back Assignee</span>
+        <span>
+          <a th:href="@{/assignee(username=${user.username})}" th:object="${user.username}">Dashboard</a>
+        </span>
       </p>
       <hr />
     </div>
-    <form th:action="@{/logout}" method="POST">
-      <input type="submit" value="Logout" />
-    </form>
   </body>
 </html>

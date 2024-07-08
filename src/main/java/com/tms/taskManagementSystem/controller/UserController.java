@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tms.taskManagementSystem.entity.Task;
@@ -165,6 +164,8 @@ public class UserController {
     @GetMapping("/assignor/update")
     public String updateTask(Model model, @RequestParam("taskId") int taskId) {
         Task task = taskService.getTaskById(taskId);
+        List<User> assigneeList = userService.getAssignees();
+        model.addAttribute("assignees", assigneeList);
         model.addAttribute("task", task);
         return "update-task";
     }

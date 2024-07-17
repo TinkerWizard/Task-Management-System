@@ -1,6 +1,5 @@
 package com.tms.taskManagementSystem.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tms.taskManagementSystem.dao.AuthorityRepository;
@@ -12,7 +11,6 @@ public class AuthorityService {
 
     private AuthorityRepository authorityRepository;
 
-    @Autowired
     public AuthorityService(AuthorityRepository authorityRepository)
     {
         this.authorityRepository = authorityRepository;

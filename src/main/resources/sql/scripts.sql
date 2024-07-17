@@ -7,7 +7,7 @@ USE tms;
 CREATE TABLE users (
     name VARCHAR(50) NOT NULL,
     username VARCHAR(50) PRIMARY KEY,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL,
     enabled tinyint(1) NOT NULL
 );

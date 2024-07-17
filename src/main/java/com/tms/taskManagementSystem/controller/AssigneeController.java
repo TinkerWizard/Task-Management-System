@@ -14,7 +14,7 @@ import com.tms.taskManagementSystem.entity.User;
 import com.tms.taskManagementSystem.service.AuthorityService;
 import com.tms.taskManagementSystem.service.TaskService;
 import com.tms.taskManagementSystem.service.UserService;
-import com.tms.taskManagementSystem.util.IsAuthorized;
+import com.tms.taskManagementSystem.util.Utils;
 
 @Controller
 public class AssigneeController {
@@ -23,7 +23,6 @@ public class AssigneeController {
     TaskService taskService;
     AuthorityService authorityService;
 
-    IsAuthorized isAuthorized;
 
     // @Autowired
     public AssigneeController(UserService userService, TaskService taskService, AuthorityService authorityService) {
@@ -34,7 +33,7 @@ public class AssigneeController {
 
     @GetMapping("/assignee")
     public String assignee(@RequestParam("username") String username, Model model) {
-        if (!isAuthorized.isAuthorized(username)) {
+        if (!userService.isAuthorized(username)) {
             return "/403"; // Return a 403 error page if not authorized
         }
         User assignee = userService.getUserByUsername(username);

@@ -15,7 +15,7 @@ import com.tms.taskManagementSystem.entity.User;
 import com.tms.taskManagementSystem.service.AuthorityService;
 import com.tms.taskManagementSystem.service.TaskService;
 import com.tms.taskManagementSystem.service.UserService;
-import com.tms.taskManagementSystem.util.IsAuthorized;
+import com.tms.taskManagementSystem.util.Utils;
 
 @Controller
 public class AssignorController {
@@ -23,8 +23,6 @@ public class AssignorController {
     UserService userService;
     TaskService taskService;
     AuthorityService authorityService;
-
-    IsAuthorized isAuthorized;
 
     // @Autowired
     public AssignorController(UserService userService, TaskService taskService, AuthorityService authorityService) {
@@ -36,7 +34,7 @@ public class AssignorController {
 
     @GetMapping("/assignor")
     public String assignorPage(Model model, @RequestParam("username") String username) {
-        if (!isAuthorized.isAuthorized(username)) {
+        if (!userService.isAuthorized(username)) {
             return "/403"; // Return a 403 error page if not authorized
         }
         System.out.println("Assignor");

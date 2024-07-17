@@ -41,10 +41,7 @@ public class TaskService {
         taskResopisitory.save(task);
     }
     
-    // public void updateTask(Task task)
-    // {
-    //     taskResopisitory.
-    // }
+
 
     public Task getTaskById(int taskId)
     {

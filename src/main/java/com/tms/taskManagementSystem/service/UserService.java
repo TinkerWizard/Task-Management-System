@@ -3,6 +3,9 @@ package com.tms.taskManagementSystem.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.tms.taskManagementSystem.dao.UserRepository;
@@ -43,5 +46,26 @@ public class UserService {
     }
     public List<User> getAssignees() {
         return userRepository.findUsersByAuthority("ASSIGNEE");
+    }
+
+
+
+    // ------------- Other methods-----------
+    public String getAuthenticatedUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                return ((UserDetails) principal).getUsername();
+            } else {
+                return principal.toString();
+            }
+        }
+        return null;
+    }
+
+    public boolean isAuthorized(String username) {
+        String authenticatedUsername = getAuthenticatedUsername();
+        return authenticatedUsername != null && authenticatedUsername.equals(username);
     }
 }

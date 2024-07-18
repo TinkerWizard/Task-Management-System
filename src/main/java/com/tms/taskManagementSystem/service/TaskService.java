@@ -1,12 +1,12 @@
-package com.tms.taskManagementSystem.service;
+package com.tms.taskmanagementsystem.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tms.taskManagementSystem.dao.TaskResopisitory;
-import com.tms.taskManagementSystem.entity.Task;
+import com.tms.taskmanagementsystem.dao.TaskResopisitory;
+import com.tms.taskmanagementsystem.entity.Task;
 
 @Service
 public class TaskService {

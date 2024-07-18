@@ -1,10 +1,10 @@
-package com.tms.taskManagementSystem.dao;
-
-import com.tms.taskManagementSystem.entity.Task;
+package com.tms.taskmanagementsystem.dao;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.tms.taskmanagementsystem.entity.Task;
 
 public interface TaskResopisitory extends JpaRepository<Task, Integer> {
 

@@ -1,4 +1,4 @@
-package com.tms.taskManagementSystem;
+package com.tms.taskmanagementsystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.tms.taskManagementSystem.controller;
+package com.tms.taskmanagementsystem.controller;
 
 import java.security.Principal;
 
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.tms.taskManagementSystem.entity.User;
-import com.tms.taskManagementSystem.service.UserService;
+import com.tms.taskmanagementsystem.entity.User;
+import com.tms.taskmanagementsystem.service.UserService;
 
 @Controller
 public class LoginController {

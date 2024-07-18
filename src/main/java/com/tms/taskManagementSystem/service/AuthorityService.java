@@ -1,10 +1,10 @@
-package com.tms.taskManagementSystem.service;
+package com.tms.taskmanagementsystem.service;
 
 import org.springframework.stereotype.Service;
 
-import com.tms.taskManagementSystem.dao.AuthorityRepository;
-import com.tms.taskManagementSystem.entity.Authority;
-import com.tms.taskManagementSystem.entity.User;
+import com.tms.taskmanagementsystem.dao.AuthorityRepository;
+import com.tms.taskmanagementsystem.entity.Authority;
+import com.tms.taskmanagementsystem.entity.User;
 
 @Service
 public class AuthorityService {

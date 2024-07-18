@@ -1,6 +1,8 @@
-package com.tms.taskManagementSystem.controller;
+package com.tms.taskmanagementsystem.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,11 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tms.taskManagementSystem.entity.User;
-import com.tms.taskManagementSystem.service.AuthorityService;
-import com.tms.taskManagementSystem.service.TaskService;
-import com.tms.taskManagementSystem.service.UserService;
-import com.tms.taskManagementSystem.util.Utils;
+import com.tms.taskmanagementsystem.entity.User;
+import com.tms.taskmanagementsystem.service.AuthorityService;
+import com.tms.taskmanagementsystem.service.TaskService;
+import com.tms.taskmanagementsystem.service.UserService;
 
 @Controller
 public class AdminController {
@@ -41,6 +42,13 @@ public class AdminController {
             return "/403"; // Return a 403 error page if not authorized
         }
         List<User> users = userService.getAllUsers();
+        List<User> assignors = userService.getAssignors();
+        int assignorListSize = assignors.size();
+        User lastAssignor = assignors.get(assignorListSize - 1);
+        System.out.println("The last assignor: " + lastAssignor);
+        // for (User user : assignors) {
+        //     System.out.println(user);
+        // }
         model.addAttribute("users", users);
         return "/users/admin";
     }
@@ -48,13 +56,18 @@ public class AdminController {
     @GetMapping("/admin/add")
     public String addUser(Model model) {
         User newUser = new User();
-        newUser.setEnabled(1);
         model.addAttribute("user", newUser);
+        Map<String, Integer> lastUserNumbers = new HashMap<>();
+        lastUserNumbers.put("lastAdminUserNumber", userService.getAdminLastUserNumber());
+        lastUserNumbers.put("lastAssignorUserNumber", userService.getAssignorLastUserNumber());
+        lastUserNumbers.put("lastAssigneeUserNumber", userService.getAssigneeLastUserNumber());
+        model.addAttribute("lastNumbers", lastUserNumbers);
         return "add-user";
     }
-
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("authority") String authority) {
+    public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("authority") String authority, @ModelAttribute("generatedUsername") String generatedUsername) {
+        user.setUsername(generatedUsername);
+        user.setEnabled(1);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         authorityService.addUserWithAuthority(user, authority);
@@ -65,6 +78,11 @@ public class AdminController {
     public String upoateUser(Model model, @RequestParam("username") String username) {
         User user = userService.getUserByUsername(username);
         model.addAttribute("user", user);
+        Map<String, Integer> lastUserNumbers = new HashMap<>();
+        lastUserNumbers.put("lastAdminUserNumber", userService.getAdminLastUserNumber());
+        lastUserNumbers.put("lastAssignorUserNumber", userService.getAssignorLastUserNumber());
+        lastUserNumbers.put("lastAssigneeUserNumber", userService.getAssigneeLastUserNumber());
+        model.addAttribute("lastNumbers", lastUserNumbers);
         return "add-user";
     }
 
@@ -77,4 +95,5 @@ public class AdminController {
         System.out.println(user.toString());
         return "redirect:/admin";
     }
+
 }

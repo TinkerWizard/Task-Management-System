@@ -1,4 +1,4 @@
-package com.tms.taskManagementSystem.security;
+package com.tms.taskmanagementsystem.security;
 
 import javax.sql.DataSource;
 
@@ -49,7 +49,7 @@ public class SecurityConfig {
             .authenticationProvider(authProvider())
             .build();
     }
-    
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer -> configurer

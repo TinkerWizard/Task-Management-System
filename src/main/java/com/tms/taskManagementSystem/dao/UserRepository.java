@@ -1,4 +1,4 @@
-package com.tms.taskManagementSystem.dao;
+package com.tms.taskmanagementsystem.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.tms.taskManagementSystem.entity.User;
+import com.tms.taskmanagementsystem.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 

@@ -1,4 +1,4 @@
-package com.tms.taskManagementSystem.entity;
+package com.tms.taskmanagementsystem.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +32,7 @@ public class User {
     private int enabled;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Authority> authorities = new HashSet<>();;
+    private Set<Authority> authorities = new HashSet<>();
     
     // define constructors
     public User()

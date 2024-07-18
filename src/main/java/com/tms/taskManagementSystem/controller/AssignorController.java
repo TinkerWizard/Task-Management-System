@@ -1,4 +1,4 @@
-package com.tms.taskManagementSystem.controller;
+package com.tms.taskmanagementsystem.controller;
 
 import java.util.List;
 
@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tms.taskManagementSystem.entity.Task;
-import com.tms.taskManagementSystem.entity.User;
-import com.tms.taskManagementSystem.service.AuthorityService;
-import com.tms.taskManagementSystem.service.TaskService;
-import com.tms.taskManagementSystem.service.UserService;
-import com.tms.taskManagementSystem.util.Utils;
+import com.tms.taskmanagementsystem.entity.Task;
+import com.tms.taskmanagementsystem.entity.User;
+import com.tms.taskmanagementsystem.service.AuthorityService;
+import com.tms.taskmanagementsystem.service.TaskService;
+import com.tms.taskmanagementsystem.service.UserService;
 
 @Controller
 public class AssignorController {

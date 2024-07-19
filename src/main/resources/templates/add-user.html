@@ -29,6 +29,7 @@
         id="lastAssigneeUserNumber"
         hidden
       ></span>
+      <input th:value="${adminUsername}" >sdf</input>
       <form
         id="userForm"
         th:action="@{/save}"
@@ -87,6 +88,7 @@
                 </select>
             </div> -->
         <input type="hidden" name="authority" id="authorityInput" />
+        <input type="hidden" name="adminUsername" th:value="${adminUsername}" />
         <!-- <input type="hidden" name="username" id="username"> -->
         <button class="btn btn-info col-2" type="button" onclick="submitForm()">
           Save

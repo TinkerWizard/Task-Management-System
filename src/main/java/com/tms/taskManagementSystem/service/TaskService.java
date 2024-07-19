@@ -23,18 +23,15 @@ public class TaskService {
     }
 
     public List<Task> getTasks() {
-        List<Task> tasks = taskResopisitory.findAll();
-        return tasks;
+        return taskResopisitory.findAll();
     }
 
     public List<Task> getTasksByAssigneeId(String userId) {
-        List<Task> tasks = taskResopisitory.findByAssigneeId(userId);
-        return tasks;
+        return taskResopisitory.findByAssigneeId(userId);
     }
 
     public List<Task> getTasksByAssignorId(String userId) {
-        List<Task> tasks = taskResopisitory.findByAssignorId(userId);
-        return tasks;
+        return taskResopisitory.findByAssignorId(userId);
     }
 
     public void saveTask(Task task) {
@@ -45,7 +42,6 @@ public class TaskService {
 
     public Task getTaskById(int taskId)
     {
-        Task task = taskResopisitory.findById(taskId).get();    
-        return task;
+        return taskResopisitory.findById(taskId).get();    
     }
 }

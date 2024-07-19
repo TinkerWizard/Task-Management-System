@@ -42,19 +42,13 @@ public class AdminController {
             return "/403"; // Return a 403 error page if not authorized
         }
         List<User> users = userService.getAllUsers();
-        List<User> assignors = userService.getAssignors();
-        int assignorListSize = assignors.size();
-        User lastAssignor = assignors.get(assignorListSize - 1);
-        System.out.println("The last assignor: " + lastAssignor);
-        // for (User user : assignors) {
-        //     System.out.println(user);
-        // }
         model.addAttribute("users", users);
+        model.addAttribute("adminUsername", username);
         return "/users/admin";
     }
 
     @GetMapping("/admin/add")
-    public String addUser(Model model) {
+    public String addUser(Model model, @ModelAttribute("adminUsername") String adminUsername) {
         User newUser = new User();
         model.addAttribute("user", newUser);
         Map<String, Integer> lastUserNumbers = new HashMap<>();
@@ -62,38 +56,54 @@ public class AdminController {
         lastUserNumbers.put("lastAssignorUserNumber", userService.getAssignorLastUserNumber());
         lastUserNumbers.put("lastAssigneeUserNumber", userService.getAssigneeLastUserNumber());
         model.addAttribute("lastNumbers", lastUserNumbers);
+        model.addAttribute("adminUsername", adminUsername);
         return "add-user";
     }
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("authority") String authority, @ModelAttribute("generatedUsername") String generatedUsername) {
+    public String saveUser(Model model, @ModelAttribute("user") User user, @ModelAttribute("authority") String authority, @ModelAttribute("generatedUsername") String generatedUsername, @ModelAttribute("adminUsername") String adminUsername) {
+        String message = "added";
         user.setUsername(generatedUsername);
         user.setEnabled(1);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         authorityService.addUserWithAuthority(user, authority);
-        return "redirect:/admin";
+        model.addAttribute("message", message);
+        model.addAttribute("adminUsername", adminUsername);
+        return "user-added-updated-deleted-success";
     }
 
+    @PostMapping("/saveUpdate")
+    public String saveUpdatedUser(Model model, @ModelAttribute("user") User updatedUser, @ModelAttribute("adminUsername") String adminUsername)
+    {
+        String message = "updated";
+        System.out.println("Updated user: " + updatedUser);
+        updatedUser.setEnabled(1);
+        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        userService.saveUser(updatedUser);
+        System.out.println("--------------ADMIN USERNAME - SAVE UPDATE----------- \n " + adminUsername);
+        model.addAttribute("message", message);
+        model.addAttribute("adminUsername", adminUsername);
+        return "user-added-updated-deleted-success";
+    }
     @GetMapping("/admin/update")
-    public String upoateUser(Model model, @RequestParam("username") String username) {
+    public String updateUser(Model model, @RequestParam("username") String username, @ModelAttribute("adminUsername") String adminUsername) {
         User user = userService.getUserByUsername(username);
         model.addAttribute("user", user);
-        Map<String, Integer> lastUserNumbers = new HashMap<>();
-        lastUserNumbers.put("lastAdminUserNumber", userService.getAdminLastUserNumber());
-        lastUserNumbers.put("lastAssignorUserNumber", userService.getAssignorLastUserNumber());
-        lastUserNumbers.put("lastAssigneeUserNumber", userService.getAssigneeLastUserNumber());
-        model.addAttribute("lastNumbers", lastUserNumbers);
-        return "add-user";
+        model.addAttribute("adminUsername", adminUsername);
+        System.out.println("--------------ADMIN USERNAME - UPDATE USER----------- \n " + adminUsername);
+        return "update-user";
     }
-
+    
     @GetMapping("/admin/delete")
-    public String deleteUser(@RequestParam("username") String username) {
-        // System.out.println(username);
+    public String deleteUser(Model model, @RequestParam("username") String username, @ModelAttribute("adminUsername") String adminUsername) {
+        String message = "deleted";
         User user = userService.getUserByUsername(username);
         userService.deleteUser(user);
+        model.addAttribute("adminUsername", adminUsername);
+        model.addAttribute("message", message);
         System.out.println("User deleted. \n" + user.toString());
         System.out.println(user.toString());
-        return "redirect:/admin";
+        return "user-added-updated-deleted-success";
     }
 
 }

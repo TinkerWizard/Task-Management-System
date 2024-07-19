@@ -119,27 +119,4 @@ public class Task {
     public void setTaskStatus(String taskStatus) {
         this.taskStatus = taskStatus;
     }
-    
-
-    // public void setStatus(String status) {
-    //     // pre-defined task statuses
-    //     //set drop down in the front end
-    //     String[] taskStatus = {
-    //             "Not Started",
-    //             "In Progress",
-    //             "On Hold",
-    //             "Completed",
-    //             "Cancelled",
-    //             "Pending",
-    //             "Under Review",
-    //             "Delayed",
-    //             "In Planning",
-    //             "Blocked"
-    //     };
-    //     this.status = status;
-    // }
-
-
-    // define toString() method
-
 }

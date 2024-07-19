@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +13,12 @@
 </head>
 <body class="p-5">
     <div class="container">
-        <h3>Admin</h3>
+        <h3>Admin Dashboard</h3>
         <div class="container mb-5">
-            <a th:href="@{/admin/add}" class="btn btn-info btn-s">Add User</a>
+            <form th:action="@{/admin/add}" method="GET">
+                <input type="hidden" name="adminUsername" th:value="${adminUsername}" />
+                <button type="submit" class="btn btn-link p-0">Add User</button>
+            </form>
         </div>
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
@@ -30,18 +37,21 @@
                     <td th:text="${user.password}" />
                     <td th:text="${user.email}" />
                     <td>
-                        <a th:href="@{/admin/update(username=${user.username})}">
-                            Update
-                        </a>
-                        <a th:href="@{/admin/delete(username=${user.username})}">
-                            Delete
-                        </a>
+                        <form th:action="@{/admin/update}" method="get">
+                            <input type="hidden" name="username" th:value="${user.username}" />
+                            <input type="hidden" name="adminUsername" th:value="${adminUsername}" />
+                            <button type="submit" class="btn btn-link p-0">Update</button>
+                        </form>
+                        <form th:action="@{/admin/delete}" method="get">
+                            <input type="hidden" name="username" th:value="${user.username}" />
+                            <input type="hidden" name="adminUsername" th:value="${adminUsername}" />
+                            <button type="submit" class="btn btn-link p-0">Delete</button>
+                        </form>
                     </td>
 
                 </tr>
             </tbody>
         </table>
     </div>
-    <a th:href="@{/home}" class="d-flex justify-content-end">Back to Home</a>
 </body>
 </html>

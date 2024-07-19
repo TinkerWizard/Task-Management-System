@@ -10,6 +10,9 @@
     <div class="container">
         <h1>Login Form</h1>
         <form th:action="@{/authenticateTheUser}" method="POST" th:object="${loginForm}">
+            <div th:if="${param.error}">
+                <p class="btn btn-danger">ERROR</p>
+            </div>
             <input th:field="*{username}" type="text" id="username" class="form-control mb-2 w-25" placeholder="Username" name="username" required autofocus/>
             <input th:field="*{password}" type="password" id="password" class="form-control mb-2 w-25" placeholder="Password" name="password" required/>
             <button type="submit" class="btn btn-info col-2">Submit</button>
